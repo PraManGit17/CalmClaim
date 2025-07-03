@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import Services from '@/components/Services'
 import FAQ from '@/components/FAQ'
 import React from 'react'
+import Contact from '@/components/Contact'
 
 const Page = () => {
   return (
@@ -13,6 +14,7 @@ const Page = () => {
      <About />
      <Services />
      <FAQ />
+     <Contact />
     </div>
   )
 }
