@@ -11,15 +11,15 @@ const Navbar = () => {
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
-      setMenuOpen(false) 
+      setMenuOpen(false)
     }
   }
 
   const navLinks = [
     { label: 'About', target: 'about' },
     { label: 'Services', target: 'services' },
-    { label: 'Contact Us', target: 'contact' },
     { label: 'FAQs', target: 'faq' },
+    { label: 'Contact Us', target: 'contact' },
   ]
 
   return (
