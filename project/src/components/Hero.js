@@ -30,7 +30,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[89vh]">
+    <div className="relative w-full h-[90vh]">
       <Image
         src="/home.png"
         alt="Home Wallpaper"
