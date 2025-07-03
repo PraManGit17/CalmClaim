@@ -29,6 +29,9 @@ const Hero = () => {
     );
   }, []);
 
+
+
+
   return (
     <div className="relative w-full h-[92vh]">
       <Image
@@ -56,12 +59,19 @@ const Hero = () => {
 
         <button
           ref={buttonRef}
+          onClick={() => {
+            const el = document.getElementById('contact');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
           className="mt-6 px-6 py-3 bg-white text-gray-800 rounded-full font-semibold hover:bg-gray-900 hover:text-white transition-all"
+          aria-label="Book a Free Consult"
         >
           Book a Free Consult
         </button>
+
+
       </div>
-    </div>
+    </div >
   );
 };
 
