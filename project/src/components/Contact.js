@@ -20,14 +20,12 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  // 🟢 Animation refs
   const sectionRef = useRef(null);
   const leftTextRef = useRef(null);
   const formFieldsRef = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade in left text
       gsap.from(leftTextRef.current, {
         opacity: 0,
         y: 50,
@@ -39,7 +37,6 @@ const Contact = () => {
         },
       });
 
-      // Stagger form fields
       gsap.from(formFieldsRef.current, {
         opacity: 0,
         y: 30,
@@ -53,7 +50,7 @@ const Contact = () => {
       });
     }, sectionRef);
 
-    return () => ctx.revert(); // Clean up
+    return () => ctx.revert();
   }, []);
 
   const handleChange = (e) => {
@@ -81,6 +78,7 @@ const Contact = () => {
     if (Object.keys(formErrors).length === 0) {
       console.log('Form Submitted:', form);
       setSubmitted(true);
+      alert("✅ Form submitted successfully!");
     } else {
       setErrors(formErrors);
       setSubmitted(false);
@@ -89,18 +87,18 @@ const Contact = () => {
 
   return (
     <div ref={sectionRef} className='w-full min-h-screen'>
-      <div className='flex flex-col items-center px-20 py-10 w-full h-full'>
-        <div className='w-full flex items-center justify-center text-4xl font-semibold'>
+      <div className='flex flex-col items-center px-4 sm:px-10 lg:px-20 py-10 w-full h-full'>
+        <div className='w-full flex items-center justify-center text-3xl sm:text-4xl font-semibold text-center mt-10'>
           Contact Form
         </div>
 
-        <div className='w-full h-full p-10 flex items-start justify-between'>
+        <div className='w-full h-full flex flex-col lg:flex-row items-start justify-between gap-10 mt-10'>
           {/* LEFT TEXT SECTION */}
-          <div ref={leftTextRef} className='flex flex-col w-1/2 h-full py-5'>
-            <div className='text-5xl font-semibold w-[75%] text-indigo-600'>
+          <div ref={leftTextRef} className='flex flex-col w-full lg:w-1/2 h-full py-5'>
+            <div className='text-3xl sm:text-4xl font-semibold text-indigo-600 w-full'>
               Fill Out The Contact Form To Reach Us
             </div>
-            <div className='max-w-96 text-gray-500 font-normal mt-6 leading-relaxed'>
+            <div className='text-gray-500 font-normal mt-6 leading-relaxed'>
               Any feedback, query or enquiry; use this form to reach us and get your doubts resolved.
             </div>
             <div className='text-gray-500 font-normal mt-2 leading-relaxed'>
@@ -109,10 +107,9 @@ const Contact = () => {
           </div>
 
           {/* FORM */}
-          <div className='flex w-1/2 h-full px-15'>
+          <div className='flex w-full lg:w-1/2 h-full'>
             <form className='flex flex-col space-y-4 w-full h-full' onSubmit={handleSubmit}>
               {[
-                // Name
                 <div key='name' className='w-full flex flex-col gap-1'>
                   <label className='text-md font-semibold'>Name:</label>
                   <input
@@ -126,7 +123,6 @@ const Contact = () => {
                   {errors.name && <span className="text-sm text-red-500">{errors.name}</span>}
                 </div>,
 
-                // Email
                 <div key='email' className='w-full flex flex-col gap-1'>
                   <label className='text-md font-semibold'>Email:</label>
                   <input
@@ -140,7 +136,6 @@ const Contact = () => {
                   {errors.email && <span className="text-sm text-red-500">{errors.email}</span>}
                 </div>,
 
-                // Phone
                 <div key='phone' className='w-full flex flex-col gap-1'>
                   <label className='text-md font-semibold'>Phone:</label>
                   <input
@@ -154,7 +149,6 @@ const Contact = () => {
                   {errors.phone && <span className="text-sm text-red-500">{errors.phone}</span>}
                 </div>,
 
-                // Message
                 <div key='message' className='w-full flex flex-col gap-1'>
                   <label className='text-md font-semibold'>Message:</label>
                   <textarea
@@ -168,7 +162,6 @@ const Contact = () => {
                   {errors.message && <span className="text-sm text-red-500">{errors.message}</span>}
                 </div>,
 
-                // Preferred Contact Time
                 <div key='contactTime' className='w-full flex flex-col gap-1'>
                   <label className='text-md font-semibold'>Preferred Contact Time:</label>
                   <input
@@ -182,7 +175,6 @@ const Contact = () => {
                   {errors.contactTime && <span className="text-sm text-red-500">{errors.contactTime}</span>}
                 </div>,
 
-                // Checkbox
                 <div key='checkbox' className='w-full flex items-center gap-2'>
                   <input
                     type='checkbox'
@@ -194,23 +186,17 @@ const Contact = () => {
                   {errors.notRobot && <span className="text-sm text-red-500 ml-2">{errors.notRobot}</span>}
                 </div>,
               ].map((field, i) => (
-                <div
-                  key={i}
-                  ref={(el) => (formFieldsRef.current[i] = el)}
-                >
+                <div key={i} ref={(el) => (formFieldsRef.current[i] = el)}>
                   {field}
                 </div>
               ))}
 
-              {/* Submit */}
+              {/* Submit Button */}
               <div ref={(el) => (formFieldsRef.current[formFieldsRef.current.length] = el)} className='w-full flex items-center justify-center'>
-                <button type='submit' className='px-3 py-2 bg-indigo-600 w-[50%] text-white rounded-lg'>
+                <button type='submit' className='px-3 py-2 bg-indigo-600 w-[70%] sm:w-[50%] text-white rounded-lg'>
                   Submit
                 </button>
               </div>
-
-              {/* Success Message */}
-              {submitted && <p className="text-green-600 text-center">Form submitted successfully!</p>}
             </form>
           </div>
         </div>
